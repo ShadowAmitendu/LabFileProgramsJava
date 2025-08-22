@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Book {
-    private final String title;
-    private final String author;
+    private String title;
+    private String author;
     private boolean available;
 
     public Book(String title, String author) {
@@ -19,9 +19,9 @@ class Book {
 }
 
 class Member {
-    private final String name;
-    private final int id;
-    private final ArrayList<Book> borrowedBooks;
+    private  String name;
+    private  int id;
+    private  ArrayList<Book> borrowedBooks;
 
     public Member(String name, int id) {
         this.name = name;
@@ -35,9 +35,9 @@ class Member {
 }
 
 class Library {
-    private final ArrayList<Book> books = new ArrayList<>();
-    private final ArrayList<Member> members = new ArrayList<>();
-    private final Scanner scanner = new Scanner(System.in);
+    private  ArrayList<Book> books = new ArrayList<>();
+    private  ArrayList<Member> members = new ArrayList<>();
+    private  Scanner scanner = new Scanner(System.in);
 
     // ---------------- Books ----------------
     private void addBook() {
