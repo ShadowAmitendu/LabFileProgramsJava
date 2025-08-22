@@ -6,41 +6,66 @@ class Book {
     private String author;
     private boolean available;
 
-    public Book(String title, String author) {
+    Book(String title, String author) {
         this.title = title;
         this.author = author;
         this.available = true;
     }
 
-    public String getTitle() { return title; }
-    public String getAuthor() { return author; }
-    public boolean isAvailable() { return available; }
-    public void setAvailable(boolean available) { this.available = available; }
+    String getTitle() {
+        return title;
+    }
+
+    String getAuthor() {
+        return author;
+    }
+
+    boolean isAvailable() {
+        return available;
+    }
+
+    void setAvailable(boolean available) {
+        this.available = available;
+    }
 }
 
 class Member {
-    private  String name;
-    private  int id;
-    private  ArrayList<Book> borrowedBooks;
+    private String name;
+    private int id;
+    private ArrayList<Book> borrowedBooks;
 
-    public Member(String name, int id) {
+    Member(String name, int id) {
         this.name = name;
         this.id = id;
         this.borrowedBooks = new ArrayList<>();
     }
 
-    public String getName() { return name; }
-    public int getId() { return id; }
-    public ArrayList<Book> getBorrowedBooks() { return borrowedBooks; }
+    String getName() {
+        return name;
+    }
+
+    int getId() {
+        return id;
+    }
+
+    ArrayList<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
 }
 
 class Library {
-    private  ArrayList<Book> books = new ArrayList<>();
-    private  ArrayList<Member> members = new ArrayList<>();
-    private  Scanner scanner = new Scanner(System.in);
+    private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<Member> members = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
+
+    // Run
+    public static void main(String[] args) {
+        Library lib = new Library();
+        lib.mainMenu();
+    }
 
     // ---------------- Books ----------------
-    private void addBook() {
+    void addBook() {
         System.out.print("Enter book title: ");
         String title = scanner.nextLine();
         System.out.print("Enter author: ");
@@ -49,7 +74,7 @@ class Library {
         System.out.println("Book added successfully.");
     }
 
-    private void removeBook() {
+    void removeBook() {
         listBooks();
         if (books.isEmpty()) return;
         System.out.print("Enter book number to remove: ");
@@ -63,7 +88,7 @@ class Library {
         }
     }
 
-    private void listBooks() {
+    void listBooks() {
         if (books.isEmpty()) {
             System.out.println("No books in library.");
             return;
@@ -71,13 +96,12 @@ class Library {
         System.out.println("\n--- Books ---");
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
-            System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor() +
-                    " | Available: " + book.isAvailable());
+            System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor() + " | Available: " + book.isAvailable());
         }
     }
 
     // ---------------- Members ----------------
-    private void addMember() {
+    void addMember() {
         System.out.print("Enter member name: ");
         String name = scanner.nextLine();
         System.out.print("Enter member ID: ");
@@ -87,7 +111,7 @@ class Library {
         System.out.println("Member added successfully.");
     }
 
-    private void removeMember() {
+    void removeMember() {
         listMembers();
         if (members.isEmpty()) return;
         System.out.print("Enter member number to remove: ");
@@ -101,7 +125,7 @@ class Library {
         }
     }
 
-    private void listMembers() {
+    void listMembers() {
         if (members.isEmpty()) {
             System.out.println("No members in library.");
             return;
@@ -114,7 +138,7 @@ class Library {
     }
 
     // ---------------- Borrow / Return ----------------
-    private void borrowBook() {
+    void borrowBook() {
         listMembers();
         if (members.isEmpty()) return;
         System.out.print("Select member number: ");
@@ -148,7 +172,7 @@ class Library {
         }
     }
 
-    private void returnBook() {
+    void returnBook() {
         listMembers();
         if (members.isEmpty()) return;
         System.out.print("Select member number: ");
@@ -187,7 +211,7 @@ class Library {
     }
 
     // ---------------- Menus ----------------
-    private void booksMenu() {
+    void booksMenu() {
         while (true) {
             System.out.println("\n--- Books Menu ---");
             System.out.println("1. Add Book");
@@ -201,13 +225,15 @@ class Library {
                 case 1 -> addBook();
                 case 2 -> removeBook();
                 case 3 -> listBooks();
-                case 0 -> { return; }
+                case 0 -> {
+                    return;
+                }
                 default -> System.out.println("Invalid choice.");
             }
         }
     }
 
-    private void membersMenu() {
+    void membersMenu() {
         while (true) {
             System.out.println("\n--- Members Menu ---");
             System.out.println("1. Add Member");
@@ -221,13 +247,15 @@ class Library {
                 case 1 -> addMember();
                 case 2 -> removeMember();
                 case 3 -> listMembers();
-                case 0 -> { return; }
+                case 0 -> {
+                    return;
+                }
                 default -> System.out.println("Invalid choice.");
             }
         }
     }
 
-    public void mainMenu() {
+    void mainMenu() {
         while (true) {
             System.out.println("\n=== Library Main Menu ===");
             System.out.println("1. Books Menu");
@@ -243,15 +271,12 @@ class Library {
                 case 2 -> membersMenu();
                 case 3 -> borrowBook();
                 case 4 -> returnBook();
-                case 0 -> { System.out.println("Goodbye!"); return; }
+                case 0 -> {
+                    System.out.println("Goodbye!");
+                    return;
+                }
                 default -> System.out.println("Invalid choice.");
             }
         }
-    }
-
-    // Run
-    public static void main(String[] args) {
-        Library lib = new Library();
-        lib.mainMenu();
     }
 }
