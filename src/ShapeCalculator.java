@@ -13,6 +13,7 @@ abstract class Shape {
     }
 
     abstract double calculateArea();
+
     abstract double calculatePerimeter();
 }
 
@@ -77,28 +78,24 @@ class Rectangle extends Shape {
 public class ShapeCalculator {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
         System.out.println("===== SHAPE AREA & PERIMETER CALCULATOR =====");
         System.out.println("1. CIRCLE");
         System.out.println("2. RECTANGLE");
         System.out.println("0. EXIT");
         System.out.print("ENTER YOUR CHOICE: ");
         int choice = input.nextInt();
-
         switch (choice) {
             case 1:
                 Circle circle = new Circle();
                 System.out.print("ENTER RADIUS: ");
                 double radius = input.nextDouble();
                 circle.setDimensions(radius);
-
                 System.out.println("\n===== RESULT =====");
                 System.out.println("SHAPE: " + circle.getShapeName());
                 System.out.println("RADIUS: " + circle.getRadius());
                 System.out.println("AREA: " + circle.calculateArea());
                 System.out.println("PERIMETER: " + circle.calculatePerimeter());
                 break;
-
             case 2:
                 Rectangle rectangle = new Rectangle();
                 System.out.print("ENTER LENGTH: ");
@@ -106,7 +103,6 @@ public class ShapeCalculator {
                 System.out.print("ENTER BREADTH: ");
                 double breadth = input.nextDouble();
                 rectangle.setDimensions(length, breadth);
-
                 System.out.println("\n===== RESULT =====");
                 System.out.println("SHAPE: " + rectangle.getShapeName());
                 System.out.println("LENGTH: " + rectangle.getLength());
@@ -114,11 +110,9 @@ public class ShapeCalculator {
                 System.out.println("AREA: " + rectangle.calculateArea());
                 System.out.println("PERIMETER: " + rectangle.calculatePerimeter());
                 break;
-
             case 0:
                 System.out.println("EXITING...");
                 System.exit(0);
-
             default:
                 System.out.println("INVALID CHOICE!");
         }

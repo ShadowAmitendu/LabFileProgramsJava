@@ -4,8 +4,8 @@ class ShoppingApp {
     StoreManager sm = new StoreManager(10);
 
     public static void main(String[] args) {
-        ShoppingApp shoppingApp = new ShoppingApp();
-        shoppingApp.mainMenu();
+        ShoppingApp shoppingCartApp = new ShoppingApp();
+        shoppingCartApp.mainMenu();
     }
 
     void mainMenu() {
@@ -20,10 +20,17 @@ class ShoppingApp {
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1: menuManager(); break;
-                case 2: customerMenu(); break;
-                case 0: System.out.println("Exiting Application..."); break;
-                default: System.out.println("Invalid choice!");
+                case 1:
+                    menuManager();
+                    break;
+                case 2:
+                    customerMenu();
+                    break;
+                case 0:
+                    System.out.println("Exiting Application...");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
             }
         } while (choice != 0);
     }
@@ -44,13 +51,26 @@ class ShoppingApp {
             choice = input.nextInt();
 
             switch (choice) {
-                case 1: cart.addProdToCart(sm); break;
-                case 2: cart.removeProdFromCart(); break;
-                case 3: cart.displayCart(); break;
-                case 4: sm.listProducts(); break;
-                case 5: cart.checkout(); break;
-                case 0: System.out.println("Exiting customer menu..."); break;
-                default: System.out.println("Invalid choice");
+                case 1:
+                    cart.addProdToCart(sm);
+                    break;
+                case 2:
+                    cart.removeProdFromCart();
+                    break;
+                case 3:
+                    cart.displayCart();
+                    break;
+                case 4:
+                    sm.listProducts();
+                    break;
+                case 5:
+                    cart.checkout();
+                    break;
+                case 0:
+                    System.out.println("Exiting customer menu...");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
             }
         } while (choice != 0);
     }
@@ -68,22 +88,33 @@ class ShoppingApp {
             System.out.print("Select an option: ");
             choice = sc.nextInt();
 
-            switch(choice) {
-                case 1: sm.addProduct(); break;
-                case 2: sm.listProducts(); break;
-                case 3: sm.removeProduct(); break;
-                case 4: sm.changeProductPrice(); break;
-                case 0: System.out.println("Exiting manager menu..."); break;
-                default: System.out.println("Invalid choice");
+            switch (choice) {
+                case 1:
+                    sm.addProduct();
+                    break;
+                case 2:
+                    sm.listProducts();
+                    break;
+                case 3:
+                    sm.removeProduct();
+                    break;
+                case 4:
+                    sm.changeProductPrice();
+                    break;
+                case 0:
+                    System.out.println("Exiting manager menu...");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
             }
-        } while(choice != 0);
+        } while (choice != 0);
     }
 }
 
 // Product Class
 class Product {
-    private int productId;
-    private String productName;
+    private final int productId;
+    private final String productName;
     private double productPrice;
 
     Product(int productId, String productName, double productPrice) {
@@ -95,9 +126,11 @@ class Product {
     int getProductId() {
         return productId;
     }
+
     String getProductName() {
         return productName;
     }
+
     double getProductPrice() {
         return productPrice;
     }
@@ -107,9 +140,9 @@ class Product {
     }
 }
 
-// Store Manager Class
+// Store Manager Class (THIS IS OPTIONAL IF WE NEED TO HARD CODE PRODUCTS)
 class StoreManager {
-    private Product[] products;
+    private final Product[] products;
     private int count;
 
     StoreManager(int size) {
@@ -149,7 +182,7 @@ class StoreManager {
         for (int i = 0; i < count; i++) {
             if (products[i] != null && products[i].getProductId() == productId) {
                 for (int j = i; j < count - 1; j++) {
-                    products[j] = products[j+1];
+                    products[j] = products[j + 1];
                 }
                 products[count - 1] = null;
                 count--;
@@ -168,9 +201,7 @@ class StoreManager {
         System.out.println("\n--- Product List ---");
         for (int i = 0; i < count; i++) {
             if (products[i] != null) {
-                System.out.println("ID: " + products[i].getProductId() +
-                        " | Name: " + products[i].getProductName() +
-                        " | Price: " + products[i].getProductPrice());
+                System.out.println("ID: " + products[i].getProductId() + " | Name: " + products[i].getProductName() + " | Price: " + products[i].getProductPrice());
             }
         }
     }
@@ -204,7 +235,7 @@ class StoreManager {
 
 // Cart Class
 class Cart {
-    private Product[] products;
+    private final Product[] products;
     private int count;
 
     Cart(int size) {
@@ -245,7 +276,7 @@ class Cart {
         for (int i = 0; i < count; i++) {
             if (products[i] != null && products[i].getProductId() == productId) {
                 for (int j = i; j < count - 1; j++) {
-                    products[j] = products[j+1];
+                    products[j] = products[j + 1];
                 }
                 products[count - 1] = null;
                 count--;
@@ -264,9 +295,7 @@ class Cart {
         System.out.println("\n--- Shopping Cart ---");
         double total = 0;
         for (int i = 0; i < count; i++) {
-            System.out.println("ID: " + products[i].getProductId() +
-                    " | Name: " + products[i].getProductName() +
-                    " | Price: " + products[i].getProductPrice());
+            System.out.println("ID: " + products[i].getProductId() + " | Name: " + products[i].getProductName() + " | Price: " + products[i].getProductPrice());
             total += products[i].getProductPrice();
         }
         System.out.println("Total Price: " + total);

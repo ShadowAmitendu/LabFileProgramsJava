@@ -13,15 +13,15 @@ class Book {
     }
 
     String getTitle() {
-        return title;
+        return this.title;
     }
 
     String getAuthor() {
-        return author;
+        return this.author;
     }
 
     boolean isAvailable() {
-        return available;
+        return this.available;
     }
 
     void setAvailable(boolean available) {
@@ -41,15 +41,15 @@ class Member {
     }
 
     String getName() {
-        return name;
+        return this.name;
     }
 
     int getId() {
-        return id;
+        return this.id;
     }
 
     ArrayList<Book> getBorrowedBooks() {
-        return borrowedBooks;
+        return this.borrowedBooks;
     }
 }
 
@@ -58,7 +58,6 @@ class Library {
     private ArrayList<Member> members = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    // Run
     public static void main(String[] args) {
         Library lib = new Library();
         lib.mainMenu();
@@ -66,12 +65,12 @@ class Library {
 
     // ---------------- Books ----------------
     void addBook() {
-        System.out.print("Enter book title: ");
+        System.out.print("Enter book Title: ");
         String title = scanner.nextLine();
-        System.out.print("Enter author: ");
+        System.out.print("Enter Author: ");
         String author = scanner.nextLine();
         books.add(new Book(title, author));
-        System.out.println("Book added successfully.");
+        System.out.println("Book Added!");
     }
 
     void removeBook() {
@@ -82,9 +81,10 @@ class Library {
         scanner.nextLine();
         if (choice >= 1 && choice <= books.size()) {
             books.remove(choice - 1);
-            System.out.println("Book removed.");
+            System.out.println("Book Removed.");
         } else {
-            System.out.println("Invalid choice.");
+            System.out.println("Invalid Choice.");
+            removeBook();
         }
     }
 
@@ -178,19 +178,16 @@ class Library {
         System.out.print("Select member number: ");
         int memberChoice = scanner.nextInt();
         scanner.nextLine();
-
         if (memberChoice < 1 || memberChoice > members.size()) {
             System.out.println("Invalid member.");
             return;
         }
         Member member = members.get(memberChoice - 1);
-
         ArrayList<Book> borrowed = member.getBorrowedBooks();
         if (borrowed.isEmpty()) {
             System.out.println("No borrowed books.");
             return;
         }
-
         System.out.println("\n--- Borrowed Books ---");
         for (int i = 0; i < borrowed.size(); i++) {
             Book b = borrowed.get(i);
@@ -258,10 +255,10 @@ class Library {
     void mainMenu() {
         while (true) {
             System.out.println("\n=== Library Main Menu ===");
-            System.out.println("1. Books Menu");
-            System.out.println("2. Members Menu");
-            System.out.println("3. Borrow Book");
-            System.out.println("4. Return Book");
+            System.out.println("1. Books    Menu");
+            System.out.println("2. Members  Menu");
+            System.out.println("3. Borrow   Book");
+            System.out.println("4. Return   Book");
             System.out.println("0. Exit");
             System.out.print("Choose: ");
             int choice = scanner.nextInt();

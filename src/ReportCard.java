@@ -12,15 +12,15 @@ class Student {
         this.className = className;
     }
 
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
-    int getRollNumber() {
+    public int getRollNumber() {
         return this.rollNumber;
     }
 
-    String getClassName() {
+    public String getClassName() {
         return this.className;
     }
 }
