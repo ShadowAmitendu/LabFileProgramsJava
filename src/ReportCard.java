@@ -36,11 +36,11 @@ class Subject {
     }
 
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public int getMarks() {
-        return marks;
+        return this.marks;
     }
 }
 
@@ -79,7 +79,6 @@ class ReportCard {
 
     }
 
-    // Helper method to calculate grade
     private String calculateGrade(double percentage) {
         if (percentage >= 90) return "O";
         else if (percentage >= 80) return "E";

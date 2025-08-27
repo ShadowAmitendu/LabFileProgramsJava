@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class BankAccountSystem {
-    private Account account;
-    private Transaction transaction;
+    private Account acc;
+    private Transaction trans;
 
     public static void main(String[] args) {
         BankAccountSystem bankAccountSystem = new BankAccountSystem();
@@ -10,8 +10,8 @@ public class BankAccountSystem {
     }
 
     void menu() {
-        Scanner input = new Scanner(System.in);
-        int choice;
+        Scanner sc = new Scanner(System.in);
+        int ch;
 
         while (true) {
             System.out.println("\n--- BANK ACCOUNT SYSTEM ---");
@@ -20,36 +20,36 @@ public class BankAccountSystem {
             System.out.println("3. Withdraw");
             System.out.println("4. Show Balance");
             System.out.println("0. Exit");
-            System.out.print("Your choice: ");
-            choice = input.nextInt();
-            input.nextLine();
-            switch (choice) {
+            System.out.print("Your ch: ");
+            ch = sc.nextInt();
+            sc.nextLine();
+            switch (ch) {
                 case 1:
                     createAccount();
                     break;
                 case 2:
-                    if (account != null) {
+                    if (acc != null) {
                         System.out.print("Enter amount to deposit: ");
-                        double depositAmount = input.nextDouble();
-                        transaction.deposit(depositAmount);
+                        double depositAmount = sc.nextDouble();
+                        trans.deposit(depositAmount);
                     } else {
-                        System.out.println("No account found. Create an account first.");
+                        System.out.println("No account found.");
                     }
                     break;
                 case 3:
-                    if (account != null) {
+                    if (acc != null) {
                         System.out.print("Enter amount to withdraw: ");
-                        double withdrawAmount = input.nextDouble();
-                        transaction.withdraw(withdrawAmount);
+                        double withdrawAmount = sc.nextDouble();
+                        trans.withdraw(withdrawAmount);
                     } else {
                         System.out.println("No account found. Create an account first.");
                     }
                     break;
                 case 4:
-                    if (account != null) {
-                        System.out.println("Account Holder: " + account.getAccountName());
-                        System.out.println("Account Number: " + account.getAccountNumber());
-                        System.out.println("Balance: " + account.getBalance());
+                    if (acc != null) {
+                        System.out.println("Account Holder: " + acc.getAccountName());
+                        System.out.println("Account Number: " + acc.getAccountNumber());
+                        System.out.println("Balance: " + acc.getBalance());
                     } else {
                         System.out.println("No account found.");
                     }
@@ -73,8 +73,8 @@ public class BankAccountSystem {
         System.out.print("Initial Deposit Amount: ");
         double amount = input.nextDouble();
 
-        account = new Account(accountNo, name, amount);
-        transaction = new Transaction(account);
+        acc = new Account(accountNo, name, amount);
+        trans = new Transaction(acc);
         System.out.println("Account created successfully!");
     }
 }

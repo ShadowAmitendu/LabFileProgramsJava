@@ -17,9 +17,8 @@ abstract class Shape {
     abstract double calculatePerimeter();
 }
 
-// CIRCLE CLASS
 class Circle extends Shape {
-    private double radius;
+    private double r;
 
     Circle() {
         super("CIRCLE");
@@ -27,19 +26,19 @@ class Circle extends Shape {
 
     // METHOD OVERLOADING: SET DIMENSIONS
     public void setDimensions(double radius) {
-        this.radius = radius;
+        this.r = radius;
     }
 
     public double getRadius() {
-        return radius;
+        return r;
     }
-
+    @Override
     double calculateArea() {
-        return Math.PI * radius * radius;
+        return Math.PI * r * r;
     }
 
     double calculatePerimeter() {
-        return 2 * Math.PI * radius;
+        return 2 * Math.PI * r;
     }
 }
 
@@ -52,7 +51,6 @@ class Rectangle extends Shape {
         super("RECTANGLE");
     }
 
-    // METHOD OVERLOADING: SET DIMENSIONS
     public void setDimensions(double length, double breadth) {
         this.length = length;
         this.breadth = breadth;
