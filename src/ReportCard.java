@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 // Student class
 class Student {
-    private String name;
-    private int rollNumber;
-    private String className;
+    private final String name;
+    private final int rollNumber;
+    private final String className;
 
     Student(String name, int rollNumber, String className) {
         this.name = name;
@@ -27,8 +27,8 @@ class Student {
 
 // Subject class
 class Subject {
-    private String subject;
-    private int marks;
+    private final String subject;
+    private final int marks;
 
     Subject(String subject, int marks) {
         this.subject = subject;
@@ -46,8 +46,8 @@ class Subject {
 
 // ReportCard class
 class ReportCard {
-    private Student student;
-    private Subject[] subjects;
+    private final Student student;
+    private final Subject[] subjects;
 
     ReportCard(Student student, Subject[] subjects) {
         this.student = student;

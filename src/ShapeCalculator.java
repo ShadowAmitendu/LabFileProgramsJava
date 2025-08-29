@@ -32,6 +32,7 @@ class Circle extends Shape {
     public double getRadius() {
         return r;
     }
+
     @Override
     double calculateArea() {
         return Math.PI * r * r;
@@ -75,18 +76,18 @@ class Rectangle extends Shape {
 
 public class ShapeCalculator {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("===== SHAPE AREA & PERIMETER CALCULATOR =====");
         System.out.println("1. CIRCLE");
         System.out.println("2. RECTANGLE");
         System.out.println("0. EXIT");
         System.out.print("ENTER YOUR CHOICE: ");
-        int choice = input.nextInt();
+        int choice = sc.nextInt();
         switch (choice) {
             case 1:
                 Circle circle = new Circle();
                 System.out.print("ENTER RADIUS: ");
-                double radius = input.nextDouble();
+                double radius = sc.nextDouble();
                 circle.setDimensions(radius);
                 System.out.println("\n===== RESULT =====");
                 System.out.println("SHAPE: " + circle.getShapeName());
@@ -97,9 +98,9 @@ public class ShapeCalculator {
             case 2:
                 Rectangle rectangle = new Rectangle();
                 System.out.print("ENTER LENGTH: ");
-                double length = input.nextDouble();
+                double length = sc.nextDouble();
                 System.out.print("ENTER BREADTH: ");
-                double breadth = input.nextDouble();
+                double breadth = sc.nextDouble();
                 rectangle.setDimensions(length, breadth);
                 System.out.println("\n===== RESULT =====");
                 System.out.println("SHAPE: " + rectangle.getShapeName());

@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class BankAccountSystem {
+class BankApp {
     private Account acc;
     private Transaction trans;
 
     public static void main(String[] args) {
-        BankAccountSystem bankAccountSystem = new BankAccountSystem();
-        bankAccountSystem.menu();
+        BankApp app = new BankApp();
+        app.menu();
     }
 
     void menu() {
@@ -81,8 +81,8 @@ public class BankAccountSystem {
 
 
 class Account {
-    private int accountNumber;
-    private String accountName;
+    private final int accountNumber;
+    private final String accountName;
     private double balance;
 
     Account(int accountNumber, String accountName, double balance) {
@@ -110,7 +110,7 @@ class Account {
 
 
 class Transaction {
-    private Account account;
+    private final Account account;
 
     Transaction(Account account) {
         this.account = account;
