@@ -1,17 +1,38 @@
 import java.util.Scanner;
 
 class ShoppingApp {
-    Product[] storeProducts = {
-            new Product(101, "IBM ThinkPad", 55000),
-            new Product(102, "ONEPLUS 13", 75000),
-            new Product(103, "SONY WH-18000", 80000),
-            new Product(104, "Logitech G512", 4000),
-            new Product(105, "Logitech G502 - Hero", 2500)
-    };
+    StoreManager sm = new StoreManager(10);
 
     public static void main(String[] args) {
         ShoppingApp shoppingCartApp = new ShoppingApp();
-        shoppingCartApp.customerMenu();
+        shoppingCartApp.mainMenu();
+    }
+
+    void mainMenu() {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\n===== Shopping Application =====");
+            System.out.println("1. Store Manager Menu");
+            System.out.println("2. Customer Menu");
+            System.out.println("0. Exit");
+            System.out.print("Choose option: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    menuManager();
+                    break;
+                case 2:
+                    customerMenu();
+                    break;
+                case 0:
+                    System.out.println("Exiting Application...");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 0);
     }
 
     void customerMenu() {
@@ -31,7 +52,7 @@ class ShoppingApp {
 
             switch (choice) {
                 case 1:
-                    cart.addProdToCart(storeProducts);
+                    cart.addProdToCart(sm);
                     break;
                 case 2:
                     cart.removeProdFromCart();
@@ -40,7 +61,7 @@ class ShoppingApp {
                     cart.displayCart();
                     break;
                 case 4:
-                    listProducts();
+                    sm.listProducts();
                     break;
                 case 5:
                     cart.checkout();
@@ -54,15 +75,39 @@ class ShoppingApp {
         } while (choice != 0);
     }
 
-    void listProducts() {
-        System.out.println("\n--- Product List ---");
-        for (Product p : storeProducts) {
-            if (p != null) {
-                System.out.println("ID: " + p.getProductId() +
-                        " | Name: " + p.getProductName() +
-                        " | Price: " + p.getProductPrice());
+    void menuManager() {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\n===== Store Manager Menu =====");
+            System.out.println("1. Add A Product");
+            System.out.println("2. Display All Products");
+            System.out.println("3. Remove A Product");
+            System.out.println("4. Change A Product Price");
+            System.out.println("0. Exit");
+            System.out.print("Select an option: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    sm.addProduct();
+                    break;
+                case 2:
+                    sm.listProducts();
+                    break;
+                case 3:
+                    sm.removeProduct();
+                    break;
+                case 4:
+                    sm.changeProductPrice();
+                    break;
+                case 0:
+                    System.out.println("Exiting manager menu...");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
             }
-        }
+        } while (choice != 0);
     }
 }
 
@@ -70,7 +115,7 @@ class ShoppingApp {
 class Product {
     private final int productId;
     private final String productName;
-    private final double productPrice;
+    private double productPrice;
 
     Product(int productId, String productName, double productPrice) {
         this.productId = productId;
@@ -89,6 +134,105 @@ class Product {
     double getProductPrice() {
         return productPrice;
     }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+}
+
+// Store Manager Class
+class StoreManager {
+    private final Product[] products;
+    private int count;
+
+    StoreManager(int size) {
+        products = new Product[size];
+        count = 0;
+    }
+
+    void addProduct() {
+        if (count >= products.length) {
+            System.out.println("Store is full! Cannot add more products.");
+            return;
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter product ID: ");
+        int productId = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter product name: ");
+        String productName = sc.nextLine();
+        System.out.print("Enter product price: ");
+        double productPrice = sc.nextDouble();
+
+        products[count] = new Product(productId, productName, productPrice);
+        count++;
+        System.out.println("Product added successfully!");
+    }
+
+    void removeProduct() {
+        if (count == 0) {
+            System.out.println("No products to remove!");
+            return;
+        }
+        Scanner sc = new Scanner(System.in);
+        listProducts();
+        System.out.print("Enter product ID to remove: ");
+        int productId = sc.nextInt();
+
+        for (int i = 0; i < count; i++) {
+            if (products[i] != null && products[i].getProductId() == productId) {
+                for (int j = i; j < count - 1; j++) {
+                    products[j] = products[j + 1];
+                }
+                products[count - 1] = null;
+                count--;
+                System.out.println("Product removed successfully!");
+                return;
+            }
+        }
+        System.out.println("Product not found!");
+    }
+
+    void listProducts() {
+        if (count == 0) {
+            System.out.println("No Products Found! Add products first.");
+            return;
+        }
+        System.out.println("\n--- Product List ---");
+        for (int i = 0; i < count; i++) {
+            if (products[i] != null) {
+                System.out.println("ID: " + products[i].getProductId() +
+                        " | Name: " + products[i].getProductName() +
+                        " | Price: " + products[i].getProductPrice());
+            }
+        }
+    }
+
+    void changeProductPrice() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter product ID: ");
+        int productId = sc.nextInt();
+        System.out.print("Enter new product price: ");
+        double productPrice = sc.nextDouble();
+
+        for (int i = 0; i < count; i++) {
+            if (products[i] != null && products[i].getProductId() == productId) {
+                products[i].setProductPrice(productPrice);
+                System.out.println("Price updated successfully!");
+                return;
+            }
+        }
+        System.out.println("Product not found!");
+    }
+
+    Product findProductById(int productId) {
+        for (int i = 0; i < count; i++) {
+            if (products[i] != null && products[i].getProductId() == productId) {
+                return products[i];
+            }
+        }
+        return null;
+    }
 }
 
 // Cart Class
@@ -101,24 +245,24 @@ class Cart {
         count = 0;
     }
 
-    void addProdToCart(Product[] storeProducts) {
+    void addProdToCart(StoreManager sm) {
         if (count >= products.length) {
             System.out.println("Cart is full! Cannot add more products.");
             return;
         }
         Scanner sc = new Scanner(System.in);
+        sm.listProducts();
         System.out.print("Enter product ID to add to cart: ");
         int productId = sc.nextInt();
 
-        for (Product storeProduct : storeProducts) {
-            if (storeProduct != null && storeProduct.getProductId() == productId) {
-                products[count] = storeProduct;
-                count++;
-                System.out.println("Product added to cart!");
-                return;
-            }
+        Product storeProduct = sm.findProductById(productId);
+        if (storeProduct != null) {
+            products[count] = storeProduct;
+            count++;
+            System.out.println("Product added to cart!");
+        } else {
+            System.out.println("Product not found in store.");
         }
-        System.out.println("Product not found in store.");
     }
 
     void removeProdFromCart() {
