@@ -38,6 +38,7 @@ class Circle extends Shape {
         return Math.PI * r * r;
     }
 
+    @Override
     double calculatePerimeter() {
         return 2 * Math.PI * r;
     }
@@ -65,10 +66,12 @@ class Rectangle extends Shape {
         return breadth;
     }
 
+    @Override
     double calculateArea() {
         return length * breadth;
     }
 
+    @Override
     double calculatePerimeter() {
         return 2 * (length + breadth);
     }
